@@ -1,0 +1,19 @@
+.Listing{
+	display: flex;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.Date{
+	flex: 20%;
+}
+.Textbody{
+	flex: 35%;
+}
+
+.Image{
+	flex: 45%;
+}
+
+
+

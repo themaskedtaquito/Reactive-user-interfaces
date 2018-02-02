@@ -1,0 +1,8 @@
+.Divider{
+	background-color: grey;
+	width: 60%;
+	height: 1px;
+	position: relative;
+	top: 15px;
+	left: 7%;
+}
