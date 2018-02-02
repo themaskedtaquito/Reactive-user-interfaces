@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './Textbody.css';
-import Title from './Title'
-import Body from './Body'
-import Author from './Author'
+import Title from './Title';
+import Body from './Body';
+import Author from './Author';
 
 class Textbody extends Component { //Container component to allow Title, Body, and Author components to display in a column when styling
   render() {
