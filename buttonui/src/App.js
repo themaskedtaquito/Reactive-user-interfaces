@@ -13,28 +13,23 @@ class App extends Component {
     }
   };
 
-  selectButton(e){
-
-    var buttons = document.getElementsByClassName("Button")
-    for(var i = 0; i<buttons.length;i++){
-      buttons[i].classList.remove("Selected");
-    }
-    
-    e.target.classList.add("Selected");
-
-    this.setState({
-        currentButton: e.target.innerHTML
-    });
-
+  selectButton(label){  
+     this.setState({
+         currentButton: label
+     });
   };
 
   render() {
 
+    const buttonLabels = ["First Button", "Second Button", "Third Button"];
+    const Buttons = buttonLabels.map(Blabel =>{
+     return <Button isselected= {this.state.currentButton === Blabel} onClick = {this.selectButton} label = {Blabel}/>
+    })
+
     return (
       <div className="App">
-      <Button onClick = {this.selectButton} label = "First Button"/>
-      <Button onClick = {this.selectButton} label = "Second Button"/>
-      <Button onClick = {this.selectButton} label = "Third Button"/>
+      {Buttons}
+
       <Selection currentButton = {this.state.currentButton}/>
         
       </div>

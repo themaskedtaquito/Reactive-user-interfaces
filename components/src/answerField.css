@@ -1,0 +1,12 @@
+.Answerfield{
+
+	width: 500px;
+	background-color: gray;
+	font-size: 50;
+	text-align: left;
+	padding: 10px;
+	margin-bottom: 10px;
+	position: relative;
+	top: 200px;
+	left: 200px;
+}
