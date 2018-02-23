@@ -1,0 +1,27 @@
+.Poster{
+	background-color: black;
+	font-family: Courier;
+	color: white;
+	width: 400px;
+	height: 600px;
+	font-size: 18px;
+	padding-left: 50px;
+	padding-top: 0.5px;
+	position: relative;
+	left: 400px;
+	bottom: 220px;
+
+}
+h1{
+	font-family: Helvetica;
+	font-weight: bold;
+	font-size: 72px;
+}
+
+.bot{
+	position: absolute;
+	top: 480px;
+
+	
+}
+

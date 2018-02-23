@@ -1,0 +1,24 @@
+.Inputfield{
+	width:250px;
+	font-size: 16px;
+	color: grey;
+	padding: 15px;
+
+}
+
+
+input{
+	width: 300px;
+	border: none;
+	outline: none;
+	color: black;
+	border-bottom: 1px solid lightgrey;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	font-size: 18px;
+}
+
+input.New{
+	color: lightgrey;
+}
+
