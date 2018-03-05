@@ -1,0 +1,11 @@
+.App {
+  padding: 10px;
+  font-family: Droid-serif;
+  background-color: #F5F5DC
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+

@@ -1,0 +1,33 @@
+.Contact{
+	font-size: 13px;
+	display: flex;
+	padding: 5px;
+	padding-top: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 600px;
+	border: 1px solid black;
+	height: 100px;
+	background-color: lightblue;
+}
+
+figure{
+	position: relative;
+	bottom: 18px;
+	right: 15px;
+
+}
+.Information{
+	flex: 60%;
+}
+label{
+	font-size: 18px;
+}
+
+button{
+	height: 40px;
+	width: 80px;
+	background-color: #ededed;
+	border-radius: 4px;
+	flex: 15%;
+}

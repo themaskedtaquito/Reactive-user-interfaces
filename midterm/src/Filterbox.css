@@ -1,0 +1,6 @@
+.Filterbox{
+	display: flex;
+}
+select{
+	background-color: #ededed;
+}
