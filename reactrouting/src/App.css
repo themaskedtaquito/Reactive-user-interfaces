@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+  max-height: 100px;
+}
+
+div.Scrollable{
+  background-color: black;
+  max-height: 200px;
+  overflow: auto;
+}

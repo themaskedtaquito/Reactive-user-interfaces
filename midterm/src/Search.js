@@ -32,7 +32,7 @@ class Search extends Component {
 
     	return (
       		<div className="Inputfield">
-        		<input onClick = {this.clearDefault} onChange = {this.updateText} value = {this.state.value} type = "text"></input>
+        		<input onClick = {this.clearDefault} onChange = {this.updateText} value = {this.state.value} type = "search"></input>
       		</div>
    		);
   	}

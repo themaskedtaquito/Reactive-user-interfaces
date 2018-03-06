@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './Contact.css';
 
 class Contact extends Component {
+  constructor(props){
+    super(props);
+    this.openMessageBox = this.openMessageBox.bind(this);
+  }
+
+  openMessageBox(){
+    this.props.onClick(this.props.firstName + " " + this.props.lastName);
+  }
+
   render() {
     return (
       <div className="Contact">
@@ -11,7 +20,7 @@ class Contact extends Component {
         	<p>{this.props.department}</p>
         	<p>{this.props.phone} - {this.props.email} - {this.props.address}</p>
         </div>
-        <button>Message</button>
+        <button onClick = {this.openMessageBox}>Message</button>
 
         
       </div>

@@ -17,15 +17,13 @@ class Inputfield extends Component {
 
 	clearDefault(){
 		if(this.state.defaulted === true){
-		this.setState({
-			value: "",
-			defaulted: false
-		});
-	}
-		
+			this.setState({
+				value: "",
+				defaulted: false
+			});
+		}		
 	};
-
-
+	
 	//updates both the input field and the parent
 	updateText(e){
 		let updateTo = e.target.value;
