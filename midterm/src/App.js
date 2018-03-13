@@ -93,6 +93,8 @@ class App extends Component {
 	}
 
   render() {
+  	
+
   	let allContacts = this.state.contactList.slice();
   	let allTeams = this.state.teams.slice();
 
@@ -113,8 +115,7 @@ class App extends Component {
  	allContacts = allContacts.filter(contact=>{
  		if(this.state.filter == "none"){
  			return true;
- 		}
-				
+ 		}				
 		else{
 			return contact.department.match(this.state.filter);			
 		}
@@ -132,15 +133,23 @@ class App extends Component {
   		return <Team teamName = {team.teamName} members = {team.members} onClick = {this.openMessageBox} search = {this.isolateContact}/>
   	});
 
+
+	//filters are dynamic components
+	//create html for filter
+  	let allDepartments = ["Engineering","Graphic Design","Product Design","QA Department"];
+  	let depFilters = allDepartments.map(department=>{
+  		return <option value = {department}>{department}</option>
+  	});
+  	depFilters.unshift(<option value = "none">Filter Departments: None</option>);
+
     return (
       <div className="App">
       	<h1>COMMUNE</h1>
 	      <div className = "left">      	
 	      	<Search text = {this.state.search}onChange = {this.setSearch}/>
 	      	<Sortbox onChange = {this.selectSortOption} />
-	      	<Filterbox className = "Filter" onChange = {this.selectFilterOption} />
-
-	      	
+	      	<Filterbox className = "Filter" onChange = {this.selectFilterOption} filters = {depFilters}/>
+    	
 	      	<h2>Contacts</h2>   	
 	        <div className = "Scrollable">{contacts}</div>
 	      </div>

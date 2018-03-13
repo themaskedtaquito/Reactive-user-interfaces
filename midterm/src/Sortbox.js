@@ -18,6 +18,7 @@ class Sortbox extends Component {
           <option value = "firstName">Sort by: First Name</option>
           <option value = "lastName">Sort by: Last Name</option>
           <option value = "department">Sort by: Department</option>
+          <option value = "address">Sort by: Office Location</option>
         </select>
 
       </div>

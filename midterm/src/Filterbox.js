@@ -15,11 +15,7 @@ class Filterbox extends Component {
     return (
       <div className="Filterbox">
         <select onChange ={this.setFilter}>
-          <option value = "none">Filter Departments: None </option>
-          <option value = "Engineering">Engineering</option>
-          <option value = "Graphic Design">Graphic Design</option>
-          <option value = "Product Design">Product Design</option>
-          <option value = "QA Department">QA Department</option>
+          {this.props.filters}
         </select>
 
       </div>
