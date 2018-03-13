@@ -28,16 +28,14 @@ class Messagebox extends Component {
 		}
 	}
 
-	//TO DO: HAVE "MESSAGE SENT" APPEAR AND THEN FADE OUT
-	closeMessageBox(){
+	closeMessageBox(e){
 		this.setState({
 			subject: "Subject: ",
 			body:""
 		});
-		this.props.onClick();
+
+		this.props.onClick(e.target.innerHTML);
 	}
-
-
 
   render() {
 
@@ -46,7 +44,9 @@ class Messagebox extends Component {
         <input value = {"To: "+this.props.recipient}></input>
         <input value = {this.state.subject} onChange = {this.updateText}></input>
         <textarea value = {this.state.body} onChange = {this.updateText}></textarea>
+        <button onClick = {this.closeMessageBox}>Cancel</button>
         <button onClick = {this.closeMessageBox}>Send</button>
+
       </div>
     );
   }

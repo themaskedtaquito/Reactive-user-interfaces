@@ -1,7 +1,6 @@
 .App {
   padding: 10px;
   font-family: Droid-serif;
-  background-color: #F5F5DC;
 }
 
 .App-logo {
@@ -9,11 +8,66 @@
 	height: 80px;
 }
 
+.filtering{
+	display:flex;
+}
+
 .Scrollable{
 	padding: 0px;
-	max-height: 500px;
+	max-height: 450px;
 	height: 60%;
-	width: 640px;
+	width: 530px;
 	border: 0px solid black;
 	overflow: auto;
+}
+
+.left{
+	position: relative;
+	left: 25px;
+	width: 40%;
+}
+.right{
+	width: 40%;
+	position: absolute;
+	top: 27%;
+	left: 40%;
+	
+}
+
+.notification{
+	position: fixed;
+	top: 35%;
+	right: 125px;
+	width: 100px;
+	padding: 5px;
+	text-align: center;
+	background-color: #008000;
+	opacity: 0;
+	border: 0.5px solid white;
+	color: white;
+}
+
+.animate{
+	animation-name: fade;
+	animation-duration: 1s;
+}
+
+@keyframes fade {
+    0% {opacity: 1;}
+    50%{opacity: 1;}
+    100% {opacity: 0;}
+}
+h1{
+	margin: auto 0px;
+	padding: 20px;
+	color: white;
+	background-color: #008000;
+}
+
+h2{
+	color: #ededed;
+}
+
+body{
+	background-color: #222;
 }

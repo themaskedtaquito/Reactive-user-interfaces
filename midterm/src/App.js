@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Contact from './Contact';
 import Search from './Search';
+import Sortbox from './Sortbox';
 import Filterbox from './Filterbox';
-import Teams from './Teams';
+import Team from './Team';
 import Messagebox from './Messagebox';
 
 class App extends Component {
@@ -13,19 +14,26 @@ class App extends Component {
 
 		this.setSearch = this.setSearch.bind(this);
 		this.selectSortOption = this.selectSortOption.bind(this);
+		this.selectFilterOption = this.selectFilterOption.bind(this);
 		this.sortList = this.sortList.bind(this);
 
+		this.isolateContact = this.isolateContact.bind(this);
 		this.openMessageBox = this.openMessageBox.bind(this);
 		this.closeMessageBox = this.closeMessageBox.bind(this);
 
 		this.state = {
-			contactList:[{imgsrc:"chadwick.jpg", firstName:"Chadwick",lastName:"Boseman", department:"Acting Department",phone:"(123)456-7890",email:"chadwick@gmail.com", address:"New York City,United States"},{imgsrc:"chadwick.jpg", firstName:"Michael B.",lastName:"Jordan", department:"Acting Department",phone:"(123)456-7890",email:"michael@gmail.com", address:"New York City,United States"},{imgsrc:"chadwick.jpg", firstName:"Daniel",lastName:"Kaluuya", department:"Human Resources",phone:"(123)456-7890",email:"daniel@gmail.com", address:"London,United Kingdom"},{imgsrc:"chadwick.jpg", firstName:"Chadwick",lastName:"Boseman", department:"Acting Department",phone:"(123)456-7890",email:"chadwick@gmail.com", address:"New York City,United States"},{imgsrc:"chadwick.jpg", firstName:"Michael B.",lastName:"Jordan", department:"Acting Department",phone:"(123)456-7890",email:"michael@gmail.com", address:"New York City,United States"},{imgsrc:"chadwick.jpg", firstName:"Daniel",lastName:"Kaluuya", department:"Human Resources",phone:"(123)456-7890",email:"daniel@gmail.com", address:"London,United Kingdom"},{imgsrc:"chadwick.jpg", firstName:"Chadwick",lastName:"Boseman", department:"Acting Department",phone:"(123)456-7890",email:"chadwick@gmail.com", address:"New York City,United States"},{imgsrc:"chadwick.jpg", firstName:"Michael B.",lastName:"Jordan", department:"Acting Department",phone:"(123)456-7890",email:"michael@gmail.com", address:"New York City,United States"},{imgsrc:"chadwick.jpg", firstName:"Daniel",lastName:"Kaluuya", department:"Human Resources",phone:"(123)456-7890",email:"daniel@gmail.com", address:"London,United Kingdom"}],
+			contactList:[{imgsrc:"chadwick.jpg", firstName:"Chadwick",lastName:"Boseman", department:"Graphic Design ",phone:"123-456-7890",email:"chadwick@nyu.edu", address:"New York Office"},{imgsrc:"michael.jpg", firstName:"Michael B.",lastName:"Jordan", department:"Engineering ",phone:"123-456-7890",email:"michael@nyu.edu", address:"New York Office"},{imgsrc:"daniel.jpg", firstName:"Daniel",lastName:"Kaluuya", department:"Product Design ",phone:"123-456-7890",email:"daniel@nyu.edu", address:"New York Office"},{imgsrc:"lupita.jpg", firstName:"Lupita",lastName:"Nyongo", department:"Product Design ",phone:"123-456-7890",email:"lupita@nyu.edu", address:"London Office"},{imgsrc:"danai.jpg", firstName:"Danai",lastName:"Gurira", department:"QA Department",phone:"123-456-7890",email:"danai@nyu.edu", address:"New York Office"},{imgsrc:"martin.jpg", firstName:"Martin",lastName:"Freeman", department:"QA Department",phone:"123-456-7890",email:"martin@nyu.edu", address:"London Office"},{imgsrc:"letitia.jpg", firstName:"Letitia",lastName:"Wright", department:"Engineering ",phone:"123-456-7890",email:"letitia@nyu.edu", address:"New York Office"},{imgsrc:"winston.jpg", firstName:"Winston",lastName:"Duke", department:"QA Department",phone:"123-456-7890",email:"winston@nyu.edu", address:"New York Office"},{imgsrc:"sterling.jpg", firstName:"Sterling",lastName:"Brown", department:"Engineering",phone:"123-456-7890",email:"sterling@nyu.edu", address:"London Office"},{imgsrc:"angela.jpg", firstName:"Angela",lastName:"Basset", department:"Graphic Design",phone:"123-456-7890",email:"angela@nyu.edu", address:"London Office"}],
 
+			//Black Panther was lit
 
-			searchTerm: "",
-			sort: "firstName: Ascending",
+			teams: [{teamName: "Product A Team",members:[["Michael B. Jordan","Project Leader"],["Chadwick Boseman","Lead Designer"],["Daniel Kaluuya","Associate Designer"]]},{teamName: "Product B Team",members: [["Angela Basset","Project Leader"],["Lupita Nyongo","Associate Designer"],["Sterling Brown","Lead Programmer"]]},{teamName: "QA Team",members:[["Danai Gurira","QA Lead"],["Martin Freeman","QA Associate"],["Winston Duke","QA Associate"]]},{teamName: "Web Design Team",members: [["Angela Basset","Lead Designer"],["Letitia Wright","Front End Programmer"],["Sterling Brown","Back End Programmer"]]}],
+
+			search: "",
+			sort: "firstName",
+			filter: "none",
 			messageRecipient: "",
-			messageBox: "Off"
+			messageBox: "Off",
+			notification: "",
 		}		
 	}
 
@@ -35,48 +43,65 @@ class App extends Component {
 		});
 	}
 
+	isolateContact(contact){
+		const toSearch = contact.split("- ")[0];  //contact is in the form "Name- position". split by "- " to isolate the name
+		this.setSearch(toSearch);
+	}
+
 	selectSortOption(sortOption){
 		this.setState({
 			sort: sortOption
 		});		
 	}
 
-	sortList(sort,contacts){ //ascending/descending, firstname/lastname/department, copied list of contacts
-		const sorter = sort.split(": ");
+	sortList(sort,contacts){ // firstname/lastname/department, copied list of contacts
+		
 	  	contacts = contacts.sort((a,b)=>{
-	  		if(a[sorter[0]]<b[sorter[0]]){
+	  		if(a[sort]<b[sort]){
 	  			return -1;
 	  		}
 	  		else{
 	  			return 1;
 	  		}
 	  	});
-	  	if(sort.indexOf("Desc")>=0){
-	  		contacts = contacts.reverse();
-	  	}
 	  	return contacts
+	}
+
+	selectFilterOption(filter){
+		this.setState({
+			filter: filter
+		});
 	}
 
 	openMessageBox(recipient){
 		this.setState({
 			messageRecipient: recipient,
-			messageBox: "On"
+			messageBox: "On",
+			notification: ""
 		});
 	}
 
-	closeMessageBox(){
+	closeMessageBox(event){
 		this.setState({
 			messageBox: "Off"
 		});
+		if(event == "Send"){
+			this.setState({
+				notification: "animate"
+			});
+		}
 	}
 
   render() {
   	let allContacts = this.state.contactList.slice();
+  	let allTeams = this.state.teams.slice();
 
-  	//search by first name, last name, or department
-  	//TO DO: GET RID OF CASE SENSITIVITY
+  	//search by first name and last name
   	allContacts = allContacts.filter(contact=>{
-  		if(contact.firstName.match(this.state.search)||contact.lastName.match(this.state.search)||contact.department.match(this.state.search)){
+  		const term = this.state.search.toLowerCase();
+  		const fullName = (contact.firstName + " " + contact.lastName).toLowerCase();
+
+  		if(contact.firstName.toLowerCase().match(term)||contact.lastName.toLowerCase().match(term)||fullName.match(term)){
   			return true;
   		}
   		else{
@@ -84,23 +109,48 @@ class App extends Component {
   		}
   	});
 
+  	//filter departments
+ 	allContacts = allContacts.filter(contact=>{
+ 		if(this.state.filter == "none"){
+ 			return true;
+ 		}
+				
+		else{
+			return contact.department.match(this.state.filter);			
+		}
+	});
+
   	allContacts = this.sortList(this.state.sort,allContacts); //Sort the list
 
   	//creates the html for the contacts
   	const contacts = allContacts.map(contact=>{
-  		return <Contact imgsrc={contact.imgsrc} firstName={contact.firstName} lastName={contact.lastName} department={contact.department} phone={contact.phone} email={contact.email} address={contact.address} onClick = {this.openMessageBox}/>
+  		return <Contact imgsrc={contact.imgsrc} firstName={contact.firstName} lastName={contact.lastName} department={contact.department} phone={contact.phone} email={contact.email} address={contact.address} id = {contact.id}onClick = {this.openMessageBox}/>
+  	});
+
+  	//creates the html for the teams
+  	const teams = allTeams.map(team=>{
+  		return <Team teamName = {team.teamName} members = {team.members} onClick = {this.openMessageBox} search = {this.isolateContact}/>
   	});
 
     return (
       <div className="App">
       	<h1>COMMUNE</h1>
-      	<Search onChange = {this.setSearch}/>
-      	<Filterbox onChange = {this.selectSortOption} />
-      	<Messagebox onClick = {this.closeMessageBox} className = {this.state.messageBox} recipient = {this.state.messageRecipient}/>  {/*Component is hidden until a button is clicked, fills in information based on which contact it came from*/}
+	      <div className = "left">      	
+	      	<Search text = {this.state.search}onChange = {this.setSearch}/>
+	      	<Sortbox onChange = {this.selectSortOption} />
+	      	<Filterbox className = "Filter" onChange = {this.selectFilterOption} />
 
-      	<h2>Contacts</h2>   	
-        <div className = "Scrollable">{contacts}</div>
-       	<Teams />
+	      	
+	      	<h2>Contacts</h2>   	
+	        <div className = "Scrollable">{contacts}</div>
+	      </div>
+
+	      <div className = "right">
+	       	<h2> Teams</h2>
+	       	<div className = "Scrollable">{teams}</div>
+	       	<Messagebox onClick = {this.closeMessageBox} className = {this.state.messageBox} recipient = {this.state.messageRecipient}/>  {/*Component is hidden until a button is clicked, fills in information based on which contact it came from*/}
+	       	<div className = {"notification " + this.state.notification}>Sent!</div>
+	      </div>
       </div>
     );
   }

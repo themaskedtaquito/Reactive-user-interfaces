@@ -17,6 +17,7 @@ class Search extends Component {
 		this.setState({
 			value: ""
 		});
+		this.props.onChange("");
 	};
 
 	updateText(e){
@@ -25,14 +26,13 @@ class Search extends Component {
 			value: updateTo
 		});
 		this.props.onChange(updateTo);
-
 	}
 
 	render() {
 
     	return (
       		<div className="Inputfield">
-        		<input onClick = {this.clearDefault} onChange = {this.updateText} value = {this.state.value} type = "search"></input>
+        		<input placeholder= "Search" onClick = {this.clearDefault} onChange = {this.updateText} value = {this.props.text} type = "search"></input>
       		</div>
    		);
   	}
