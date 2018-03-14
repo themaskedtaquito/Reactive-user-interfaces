@@ -4,11 +4,11 @@ import './Contact.css';
 class Contact extends Component {
   constructor(props){
     super(props);
-    this.openMessageBox = this.openMessageBox.bind(this);
+    this.openMessageBox = this.openMessageBox.bind(this); 
     this.id = this.props.id
   }
 
-  openMessageBox(){
+  openMessageBox(){ //callback function to open the messagebox
     this.props.onClick(this.props.firstName + " " + this.props.lastName);
   }
 
@@ -21,9 +21,7 @@ class Contact extends Component {
         	<p>{this.props.department}</p>
         	<p>{this.props.phone} - {this.props.email} - {this.props.address}</p>
         </div>
-        <button onClick = {this.openMessageBox}>Message</button>
-
-        
+        <button onClick = {this.openMessageBox}>Message</button>      
       </div>
     );
   }

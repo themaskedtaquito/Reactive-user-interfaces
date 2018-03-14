@@ -8,7 +8,7 @@ class Sortbox extends Component {
   }
 
   reSort(e){
-    this.props.onChange(e.target.value);
+    this.props.onChange(e.target.value);//callback function to change the sort state in the parent
   }
   render() {
 

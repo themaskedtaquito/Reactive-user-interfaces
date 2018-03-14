@@ -13,7 +13,7 @@ class Search extends Component {
 		};
 	};
 
-	clearDefault(){
+	clearDefault(){ //clear text from search box when you click on it
 		this.setState({
 			value: ""
 		});

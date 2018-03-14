@@ -12,12 +12,12 @@ class Team extends Component {
   openMessageBox(){
     let recipients = []
     for(var i=0;i<this.members.length;i++){
-      recipients.push(this.members[i][0]); //separate list otherwise Messagebox recipients includes their position
+      recipients.push(this.members[i][0]); //separate list otherwise Messagebox "To" also includes their position
     }
-    this.props.onClick(recipients);
+    this.props.onClick(recipients); //same callback function used by Contact component
   }
 
-  isolateContact(e){
+  isolateContact(e){ //sets the search to be the exact name of the clicked contact, isolating it as a selection
     this.props.search(e.target.innerHTML)
   }
 

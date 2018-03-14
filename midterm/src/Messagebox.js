@@ -29,12 +29,12 @@ class Messagebox extends Component {
 	}
 
 	closeMessageBox(e){
-		this.setState({
+		this.setState({ //set state to clear whatever was written
 			subject: "Subject: ",
 			body:""
 		});
 
-		this.props.onClick(e.target.innerHTML);
+		this.props.onClick(e.target.innerHTML); //send the button's label to know whether or not to display sent! notification
 	}
 
   render() {

@@ -8,7 +8,7 @@ class Filterbox extends Component {
   }
 
   setFilter(e){
-    this.props.onChange(e.target.value);
+    this.props.onChange(e.target.value); //callback function to change the filter state in the parent 
   }
   render() {
 

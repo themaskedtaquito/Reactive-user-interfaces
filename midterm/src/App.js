@@ -24,7 +24,6 @@ class App extends Component {
 		this.state = {
 			contactList:[{imgsrc:"chadwick.jpg", firstName:"Chadwick",lastName:"Boseman", department:"Graphic Design ",phone:"123-456-7890",email:"chadwick@nyu.edu", address:"New York Office"},{imgsrc:"michael.jpg", firstName:"Michael B.",lastName:"Jordan", department:"Engineering ",phone:"123-456-7890",email:"michael@nyu.edu", address:"New York Office"},{imgsrc:"daniel.jpg", firstName:"Daniel",lastName:"Kaluuya", department:"Product Design ",phone:"123-456-7890",email:"daniel@nyu.edu", address:"New York Office"},{imgsrc:"lupita.jpg", firstName:"Lupita",lastName:"Nyongo", department:"Product Design ",phone:"123-456-7890",email:"lupita@nyu.edu", address:"London Office"},{imgsrc:"danai.jpg", firstName:"Danai",lastName:"Gurira", department:"QA Department",phone:"123-456-7890",email:"danai@nyu.edu", address:"New York Office"},{imgsrc:"martin.jpg", firstName:"Martin",lastName:"Freeman", department:"QA Department",phone:"123-456-7890",email:"martin@nyu.edu", address:"London Office"},{imgsrc:"letitia.jpg", firstName:"Letitia",lastName:"Wright", department:"Engineering ",phone:"123-456-7890",email:"letitia@nyu.edu", address:"New York Office"},{imgsrc:"winston.jpg", firstName:"Winston",lastName:"Duke", department:"QA Department",phone:"123-456-7890",email:"winston@nyu.edu", address:"New York Office"},{imgsrc:"sterling.jpg", firstName:"Sterling",lastName:"Brown", department:"Engineering",phone:"123-456-7890",email:"sterling@nyu.edu", address:"London Office"},{imgsrc:"angela.jpg", firstName:"Angela",lastName:"Basset", department:"Graphic Design",phone:"123-456-7890",email:"angela@nyu.edu", address:"London Office"}],
 
-			//Black Panther was lit
 
 			teams: [{teamName: "Product A Team",members:[["Michael B. Jordan","Project Leader"],["Chadwick Boseman","Lead Designer"],["Daniel Kaluuya","Associate Designer"]]},{teamName: "Product B Team",members: [["Angela Basset","Project Leader"],["Lupita Nyongo","Associate Designer"],["Sterling Brown","Lead Programmer"]]},{teamName: "QA Team",members:[["Danai Gurira","QA Lead"],["Martin Freeman","QA Associate"],["Winston Duke","QA Associate"]]},{teamName: "Web Design Team",members: [["Angela Basset","Lead Designer"],["Letitia Wright","Front End Programmer"],["Sterling Brown","Back End Programmer"]]}],
 
@@ -54,7 +53,7 @@ class App extends Component {
 		});		
 	}
 
-	sortList(sort,contacts){ // firstname/lastname/department, copied list of contacts
+	sortList(sort,contacts){ // firstname/lastname/department, copied list of contacts from state
 		
 	  	contacts = contacts.sort((a,b)=>{
 	  		if(a[sort]<b[sort]){
@@ -83,24 +82,23 @@ class App extends Component {
 
 	closeMessageBox(event){
 		this.setState({
-			messageBox: "Off"
+			messageBox: "Off" //adds class to set the display to none
 		});
-		if(event == "Send"){
+		if(event == "Send"){ 
 			this.setState({
-				notification: "animate"
+				notification: "animate" 
 			});
 		}
 	}
 
-  render() {
-  	
+  render() {	
 
   	let allContacts = this.state.contactList.slice();
   	let allTeams = this.state.teams.slice();
 
   	//search by first name and last name
   	allContacts = allContacts.filter(contact=>{
-  		const term = this.state.search.toLowerCase();
+  		const term = this.state.search.toLowerCase(); //removes case sensitivity
   		const fullName = (contact.firstName + " " + contact.lastName).toLowerCase();
 
   		if(contact.firstName.toLowerCase().match(term)||contact.lastName.toLowerCase().match(term)||fullName.match(term)){
@@ -121,7 +119,8 @@ class App extends Component {
 		}
 	});
 
-  	allContacts = this.sortList(this.state.sort,allContacts); //Sort the list
+	//Sort the list
+  	allContacts = this.sortList(this.state.sort,allContacts); 
 
   	//creates the html for the contacts
   	const contacts = allContacts.map(contact=>{
@@ -142,11 +141,12 @@ class App extends Component {
   	});
   	depFilters.unshift(<option value = "none">Filter Departments: None</option>);
 
+
     return (
       <div className="App">
       	<h1>COMMUNE</h1>
 	      <div className = "left">      	
-	      	<Search text = {this.state.search}onChange = {this.setSearch}/>
+	      	<Search text = {this.state.search} onChange = {this.setSearch}/>
 	      	<Sortbox onChange = {this.selectSortOption} />
 	      	<Filterbox className = "Filter" onChange = {this.selectFilterOption} filters = {depFilters}/>
     	
