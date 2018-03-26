@@ -6,11 +6,13 @@ import Sortbox from './Sortbox';
 import Filterbox from './Filterbox';
 import Team from './Team';
 import Messagebox from './Messagebox';
+import Form from './Form';
 
 class App extends Component {
 
 	constructor(props){
 		super(props);
+		this.addContact = this.addContact.bind(this);
 
 		this.setSearch = this.setSearch.bind(this);
 		this.selectSortOption = this.selectSortOption.bind(this);
@@ -21,10 +23,11 @@ class App extends Component {
 		this.openMessageBox = this.openMessageBox.bind(this);
 		this.closeMessageBox = this.closeMessageBox.bind(this);
 
-		this.state = {
-			contactList:[{imgsrc:"chadwick.jpg", firstName:"Chadwick",lastName:"Boseman", department:"Graphic Design ",phone:"123-456-7890",email:"chadwick@nyu.edu", address:"New York Office"},{imgsrc:"michael.jpg", firstName:"Michael B.",lastName:"Jordan", department:"Engineering ",phone:"123-456-7890",email:"michael@nyu.edu", address:"New York Office"},{imgsrc:"daniel.jpg", firstName:"Daniel",lastName:"Kaluuya", department:"Product Design ",phone:"123-456-7890",email:"daniel@nyu.edu", address:"New York Office"},{imgsrc:"lupita.jpg", firstName:"Lupita",lastName:"Nyongo", department:"Product Design ",phone:"123-456-7890",email:"lupita@nyu.edu", address:"London Office"},{imgsrc:"danai.jpg", firstName:"Danai",lastName:"Gurira", department:"QA Department",phone:"123-456-7890",email:"danai@nyu.edu", address:"New York Office"},{imgsrc:"martin.jpg", firstName:"Martin",lastName:"Freeman", department:"QA Department",phone:"123-456-7890",email:"martin@nyu.edu", address:"London Office"},{imgsrc:"letitia.jpg", firstName:"Letitia",lastName:"Wright", department:"Engineering ",phone:"123-456-7890",email:"letitia@nyu.edu", address:"New York Office"},{imgsrc:"winston.jpg", firstName:"Winston",lastName:"Duke", department:"QA Department",phone:"123-456-7890",email:"winston@nyu.edu", address:"New York Office"},{imgsrc:"sterling.jpg", firstName:"Sterling",lastName:"Brown", department:"Engineering",phone:"123-456-7890",email:"sterling@nyu.edu", address:"London Office"},{imgsrc:"angela.jpg", firstName:"Angela",lastName:"Basset", department:"Graphic Design",phone:"123-456-7890",email:"angela@nyu.edu", address:"London Office"}],
+		const localContacts = localStorage.getItem('contactData');
 
-
+		if(localContacts){
+			this.state = {
+			contactList: JSON.parse(localContacts),
 			teams: [{teamName: "Product A Team",members:[["Michael B. Jordan","Project Leader"],["Chadwick Boseman","Lead Designer"],["Daniel Kaluuya","Associate Designer"]]},{teamName: "Product B Team",members: [["Angela Basset","Project Leader"],["Lupita Nyongo","Associate Designer"],["Sterling Brown","Lead Programmer"]]},{teamName: "QA Team",members:[["Danai Gurira","QA Lead"],["Martin Freeman","QA Associate"],["Winston Duke","QA Associate"]]},{teamName: "Web Design Team",members: [["Angela Basset","Lead Designer"],["Letitia Wright","Front End Programmer"],["Sterling Brown","Back End Programmer"]]}],
 
 			search: "",
@@ -32,8 +35,34 @@ class App extends Component {
 			filter: "none",
 			messageRecipient: "",
 			messageBox: "Off",
-			notification: "",
-		}		
+			notification: ""
+			}
+		}
+
+		else{		
+			this.state = {
+				contactList:[{imgsrc:"chadwick.jpg", firstName:"Chadwick",lastName:"Boseman", department:"Graphic Design ",phone:"123-456-7890",email:"chadwick@nyu.edu", address:"New York Office"},{imgsrc:"michael.jpg", firstName:"Michael B.",lastName:"Jordan", department:"Engineering ",phone:"123-456-7890",email:"michael@nyu.edu", address:"New York Office"},{imgsrc:"daniel.jpg", firstName:"Daniel",lastName:"Kaluuya", department:"Product Design ",phone:"123-456-7890",email:"daniel@nyu.edu", address:"New York Office"},{imgsrc:"lupita.jpg", firstName:"Lupita",lastName:"Nyongo", department:"Product Design ",phone:"123-456-7890",email:"lupita@nyu.edu", address:"London Office"},{imgsrc:"danai.jpg", firstName:"Danai",lastName:"Gurira", department:"QA Department",phone:"123-456-7890",email:"danai@nyu.edu", address:"New York Office"},{imgsrc:"martin.jpg", firstName:"Martin",lastName:"Freeman", department:"QA Department",phone:"123-456-7890",email:"martin@nyu.edu", address:"London Office"},{imgsrc:"letitia.jpg", firstName:"Letitia",lastName:"Wright", department:"Engineering ",phone:"123-456-7890",email:"letitia@nyu.edu", address:"New York Office"},{imgsrc:"winston.jpg", firstName:"Winston",lastName:"Duke", department:"QA Department",phone:"123-456-7890",email:"winston@nyu.edu", address:"New York Office"},{imgsrc:"sterling.jpg", firstName:"Sterling",lastName:"Brown", department:"Engineering",phone:"123-456-7890",email:"sterling@nyu.edu", address:"London Office"},{imgsrc:"angela.jpg", firstName:"Angela",lastName:"Basset", department:"Graphic Design",phone:"123-456-7890",email:"angela@nyu.edu", address:"London Office"}],
+
+
+				teams: [{teamName: "Product A Team",members:[["Michael B. Jordan","Project Leader"],["Chadwick Boseman","Lead Designer"],["Daniel Kaluuya","Associate Designer"]]},{teamName: "Product B Team",members: [["Angela Basset","Project Leader"],["Lupita Nyongo","Associate Designer"],["Sterling Brown","Lead Programmer"]]},{teamName: "QA Team",members:[["Danai Gurira","QA Lead"],["Martin Freeman","QA Associate"],["Winston Duke","QA Associate"]]},{teamName: "Web Design Team",members: [["Angela Basset","Lead Designer"],["Letitia Wright","Front End Programmer"],["Sterling Brown","Back End Programmer"]]}],
+
+				search: "",
+				sort: "firstName",
+				filter: "none",
+				messageRecipient: "",
+				messageBox: "Off",
+				notification: "",
+			}
+		}	
+	}
+
+	addContact(contactInfo){
+		let contacts = this.state.contactList.slice();
+		contacts.push(contactInfo);
+		console.log(contactInfo);
+		this.setState({
+			contactList: contacts
+		});
 	}
 
 	setSearch(term){
@@ -90,6 +119,7 @@ class App extends Component {
 			});
 		}
 	}
+
 
   render() {	
 
@@ -159,9 +189,15 @@ class App extends Component {
 	       	<div className = "Scrollable">{teams}</div>
 	       	<Messagebox onClick = {this.closeMessageBox} className = {this.state.messageBox} recipient = {this.state.messageRecipient}/>  {/*Component is hidden until a button is clicked, fills in information based on which contact it came from*/}
 	       	<div className = {"notification " + this.state.notification}>Sent!</div>
+	       	<Form onClick = {this.addContact}/>
 	      </div>
       </div>
     );
+  }
+
+  componentDidUpdate(){
+    const stringState = JSON.stringify(this.state.contactList);
+    localStorage.setItem('contactData',stringState);
   }
 }
 
